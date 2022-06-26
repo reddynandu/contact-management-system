@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siva krishna Contact App In Django</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+
+<body id="body">
+    <div class="section">
+        <div class="leftsection">
+            <i class="fa fa-address-book" aria?-hidden="true" style="color: blue;"> Contacts</i>    
+            <br>
+            <br>
+            <button class="addcontact" id="addContact"><i class="fa fa-plus" aria-hidden="true"> <span>add Contact </span> </i></button>
+        </div>
+
+        <div class="rightsection">
+            <form action="" method="GET">
+                <!-- {% csrf_token %} -->
+                <div class="form-group" id="searchBoxdiv">
+                    
+                  <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Search" name="search" style="width: 700px; height: 50px;" id="searchBox">
+                </div>
+            </form>   
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th style="padding-left: 200px;">Email</th>
+                        <th style="padding-left: 101px;">Phone Number</th>
+                    </tr>
+                   
+                {%for contact in contacts %}
+                <tr  id="uniqueid">    
+                        
+                        <td  ><p> {{contact.fname }} {{   contact.lname}}</p> </td>
+                        <td  style="padding-left: 200px;">{{contact.email}}</td>
+                        <td  style="padding-left: 101px;">{{contact.phoneNumber}}
+                            <button  title="more" class="btn btn-secondary " type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  <i class='fa fa-ellipsis-v'></i>
+                                </button> 
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                               
+                                  <form action="delete_contact/{{ contact.id }}/"  method="POST">
+                                        <button  type="submit"  class="btn btn-danger float-left "><i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                        <!-- <button type="submit"  class="btn btn-danger float-right ">EDIT</button> -->
+                                  </form>
+                                  <form action="edit_contact/{{ contact.id }}/"  method="GET">
+                                    {% csrf_token %}
+                                    <button type="submit"  class="btn btn-lite float-left "><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <!-- <button type="submit"  class="btn btn-danger float-right ">EDIT</button> -->
+                                   </form>
+                                </div>
+                            
+                        </td>
+                    </tr>
+                {%endfor%}
+                <!-- / search contact start here -->
+                {% if result%}
+                 {% for i in result%}
+                <tr  id="uniqueid">    
+                        
+                        <td  ><p> {{i.fname }} {{   i.lname}}</p> </td>
+                        <td  style="padding-left: 200px;">{{i.email}}</td>
+                        <td  style="padding-left: 101px;">{{i.phoneNumber}}
+                            <button  title="more" class="btn btn-secondary " type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  <i class='fa fa-ellipsis-v'></i>
+                                </button> 
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                               
+                                  <form action="delete_contact/{{ contact.id }}/"  method="POST">
+                                        {% csrf_token %}
+                                        <button  type="submit"  class="btn btn-danger float-left "><i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                        <!-- <button type="submit"  class="btn btn-danger float-right ">EDIT</button> -->
+                                  </form>
+                                  <form action="edit_contact/{{ contact.id }}/"  method="GET">
+                                    {% csrf_token %}
+                                    <button type="submit"  class="btn btn-lite float-left "><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <!-- <button type="submit"  class="btn btn-danger float-right ">EDIT</button> -->
+                              </form>
+                                </div>
+                        </td>
+                    </tr>
+                    {%endfor%} 
+                    {% endif %}  
+               
+                </table>
+            
+            <div id="addContactForm">
+               
+                <form class="form2" action=""  method="POST">
+                    {% csrf_token %}
+                    <p><b>Create new contact</b></p>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="First Name" name="fname">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="form-control" id="inputPassword4" placeholder="Last Name" name="lname">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="inputAddress" placeholder="email" name="email">
+                    </div>
+                    <div class="form-group">
+                      <label for="phonenuber">Phone Number </label>
+                      <input type="text" class="form-control" id="inputAddress2" placeholder="Phone Number" name="phoneNumber" maxlength="10">
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary ">Save</button>
+                    <button type="submit" class="btn btn-primary btnCancle" name="cancle">Cancle</button> 
+
+                  </form>
+            </div>
+            <div class="searchresult">
+              
+                
+            </div>
+        </div>
+    </div>
+   
+    <script>
+        document.getElementById("addContact").addEventListener("click",function(){
+            document.getElementById("addContactForm").style.display="flex";
+        })
+        document.querySelector(".btnCancle").addEventListener("click",function(){
+            document.getElementById("addContactForm").style.display="none";
+        })
+        document.getElementById("searchBoxdiv").addEventListener("click",function(){
+            document.getElementById("addContactForm").style.display="none";
+        })
+    </script>
+   
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

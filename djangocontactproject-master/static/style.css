@@ -1,0 +1,88 @@
+body{
+        background-color: rgb(241, 237, 237);
+    }
+    .section{
+        position: relative;
+        top: 0px;
+        width:70%;
+        margin:auto;
+        margin-top:10px;
+        
+    }
+    .leftsection{
+        width: 20%;
+        /* background-color: red; */
+        float: left;
+        font-size: 30px;
+        
+    }
+    .rightsection{
+        width: 80%;
+        float:right;
+        
+        
+    }
+    th{
+        font-size: 15px;
+        color: #736368;
+        
+    }
+    .tr{
+        border:1px solid black; 
+    }
+     #searchBox{
+         margin-top: 8px;
+         color: chocolate;
+         background-color: #FFFFFF;
+     }   
+     input[type=text]:focus{
+         background-color:white;
+         outline: 2px solid orange;   
+         border-radius: 5px;
+     }
+     .addcontact{
+         font-size: 20px;
+         border-radius: 18px;
+         color: #4619c4;
+         background-color: #FFFFFF;
+         transition: 0.4;
+     }
+     button>span{
+         font-size: 1px;
+     }
+     button{
+         transition: 0.1s;
+     }
+    
+    .btn{
+        float :right;
+        /* height: 20px; */
+    }
+    .btnCancle{
+        margin-right: 10px;
+    }
+    #addContactForm{
+        width: 48%;
+        /* height: 400px; */
+        margin: auto;
+        display: none;
+        position: absolute;
+        top:150px;
+        margin-left: 80px;      
+        color:rgb(240, 6, 96);
+        background-color: #FFFFFF;
+    }
+    #dropdownMenuButton{
+        display: none;
+    }
+    tr :hover>#dropdownMenuButton{
+        display: block;
+    }
+    #dropdownED{
+        width: 10px;
+    }
+    #uniqueid:hover{
+        border: 2px solid black;
+    
+    }
+  
